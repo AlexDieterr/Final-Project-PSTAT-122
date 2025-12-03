@@ -33,7 +33,7 @@ knitr::opts_chunk$set(error =  FALSE)
 <div style="text-align: center">
 <span style="color: blue;"> **STUDENT NAME **</span> 
 </div>
-- STUDENT 1    (NetID 1)
+- Alex Dieter (A070X06)
 - STUDENT 2    (NetID 2)
 - STUDENT 3    (NetID 3)
 - STUDENT 4    (NetID 4)
@@ -47,6 +47,7 @@ knitr::opts_chunk$set(error =  FALSE)
 
 
 # Introduction
+Reaction time
 -	Clear statement of the objective or research question.
 -	Brief context or motivation.
 
@@ -92,4 +93,49 @@ Guideline: 5–10 per treatment for CRD, 3–5 blocks for RCBD, total feasible w
  
  - `R` code.
 
+	•	Factor A: Lights
+Levels: off / on
+	•	Factor B: Music
+Levels: no / yes
+	•	Factor C: Time of day
+Levels: morning / evening
+	•	Blocks: subject (4 people)
+	•	Design type: 3-factor factorial with blocking on subject
+	•	Treatments: 2 × 2 × 2 = 8 treatment combinations
+	•	Experimental units: each subject will complete all 8 conditions
+	•	Total experimental units: 4 subjects × 8 conditions = 32
+	•	Trials per unit: 8 trials of reaction time per condition
+	•	Total recorded trials: 4 × 8 × 8 = 256
+	•	Randomization: randomize the order of the 8 conditions within each subject
 
+This is equivalent to an RCBD with a 2×2×2 factorial treatment structure, exactly what is covered in PSTAT 122.
+
+This is the only feasible and statistically valid way to include 3 factors with 4 subjects.
+
+Setting up Randomization part
+```{r}
+library(dplyr)
+
+subjects <- 1:4
+
+lights_levels <- c("off", "on")        # A
+music_levels  <- c("no", "yes")        # B
+time_levels   <- c("morning", "evening")  # C
+
+design_grid <- expand.grid(
+  subject = subjects,
+  lights  = lights_levels,
+  music   = music_levels,
+  time    = time_levels
+)
+
+set.seed(123)
+
+random_schedule <- design_grid %>%
+  group_by(subject) %>%
+  slice_sample(n = 8) %>%              # 8 treatment combinations per subject
+  mutate(order = row_number()) %>%
+  arrange(subject, order)
+
+random_schedule
+```
