@@ -17,7 +17,10 @@ format:
     toc: false
     toc-location: left
     number-sections: true
-    geometry: margin=0.2in
+    geometry: margin=.5in
+    indent: true
+
+
 
 ---
 ```{r setup, include=FALSE}
@@ -33,7 +36,7 @@ knitr::opts_chunk$set(error =  FALSE)
 <div style="text-align: center">
 <span style="color: blue;"> **STUDENT NAME **</span> 
 </div>
-- Alex Dieter (A070X06)
+- STUDENT 1    (NetID 1)
 - STUDENT 2    (NetID 2)
 - STUDENT 3    (NetID 3)
 - STUDENT 4    (NetID 4)
@@ -47,17 +50,32 @@ knitr::opts_chunk$set(error =  FALSE)
 
 
 # Introduction
-Reaction time
 -	Clear statement of the objective or research question.
 -	Brief context or motivation.
 
+  Reaction time is very important for many activities; sports, video games, avoiding injuries, and much more. However, the factors that influence ones reaction times are not very well known. What we are looking to find are what influences someones reaction time. What we intend to discover are the things that influence someones reaction time with common factors, namely time of day, whether or not you are listening to music, and whether or not the lights are on or off. We will figure out which of these factors truely influence reaction time, and if there is any interaction. 
+
 # Experimental Design
-- Description of factors and treatment structure.
-- Clearly state what you are measuring and the units.
-Examples: Number of words recalled (count), reaction time (seconds), taste rating (1–5 scale).
-- Identify which factors are fixed vs. random.
-- Description of design type (CRD, RCBD, factorial, etc.).
-- Explain how randomization, replication, and (if used) blocking were implemented.
+
+
+  Our experiment will be a $2^3$ factorial experiment with blocks on what impacts reaction times, and how those factors interact. Our 3 factors will be the time of day, whether or not lights are on or off, and whether or not you are listening to music. The way we will apply these treatments is by running our tests at day or night, while the lights are on/off, and whether or not the person being tested is listening to music.
+
+
+  We are measuring reaction time, through the following website, \newline `https://humanbenchmark.com/tests/reactiontime`. The way this website works is the screen changes color and you press the mouse as fast as you can after the screen color changes, and it records the time it takes to click. This website naturally does 5 tests and then returns us the mean from those 5 tests. We conduct the whole test twice, recording each individual reaction test as an experimental unit, so we have a better idea of the variance of the data. After some quick testing while deciding which website to choose, we found that it takes less than 30 seconds to run through 5 experimental units, which means our testing should be quick. 
+  
+  All of our factors will be fixed, since each factor contains each of the possible factors in that category. There is not a population of factors we are drawing from. Lights can be on or off, it can be day or night, and it can be conducted while the person is and isn't listening to music. 
+
+
+  First, we will randomly order each of the treatments using code snippet 1.The way this code works is first, it assigns each person day or night, and they will conduct the 4 combinations of lights and music at the chosen time, followed by the other time.  
+
+  We will keep the groupings of treatments occurring at morning and at night to be conducted at the same time for convenience of testing. If we so chose, we could truly randomly assign the order we do the testing, but it could take up to 4 days to complete the experiment. Since it would be easy for one person to forget, we decided convenience of conduct our experiment in a day or two was worth it. 
+
+  After we decide if you are conducting the grouping of tests during the day or night first, then we will order the remaining 4 combinations of factors randomly using r, and we will randomize the order for both the day and the night groupings. 
+
+  The way our experiment will use replication is very simple. The website we are using to track our reaction times administers 5 tests and then returns the mean. Our experimental unit will be the time it takes for one click. This means each test we get 5 replications per factor. We will do these replications back to back. 
+  
+  Our blocks will be different people. Our group consists of 4 people, so we will each be a block. Thus for each combination of treatments and blocks, we get 5 replicates. 
+
 - Sample size: Provide number of observations per condition.
 Guideline: 5–10 per treatment for CRD, 3–5 blocks for RCBD, total feasible within 1 hour.
 
@@ -92,50 +110,225 @@ Guideline: 5–10 per treatment for CRD, 3–5 blocks for RCBD, total feasible w
 # Appendices
  
  - `R` code.
-
-	•	Factor A: Lights
-Levels: off / on
-	•	Factor B: Music
-Levels: no / yes
-	•	Factor C: Time of day
-Levels: morning / evening
-	•	Blocks: subject (4 people)
-	•	Design type: 3-factor factorial with blocking on subject
-	•	Treatments: 2 × 2 × 2 = 8 treatment combinations
-	•	Experimental units: each subject will complete all 8 conditions
-	•	Total experimental units: 4 subjects × 8 conditions = 32
-	•	Trials per unit: 8 trials of reaction time per condition
-	•	Total recorded trials: 4 × 8 × 8 = 256
-	•	Randomization: randomize the order of the 8 conditions within each subject
-
-This is equivalent to an RCBD with a 2×2×2 factorial treatment structure, exactly what is covered in PSTAT 122.
-
-This is the only feasible and statistically valid way to include 3 factors with 4 subjects.
-
-Setting up Randomization part
+ 
+## Snippet 1
+ 
 ```{r}
-library(dplyr)
+set.seed(101010101)
 
-subjects <- 1:4
+dayOrNight <- c("Day", "Night")
+FirstTreatment1 <- sample(dayOrNight, size = 1)
+FirstTreatment2 <- sample(dayOrNight, size = 1)
+FirstTreatment3 <- sample(dayOrNight, size = 1)
+FirstTreatment4 <- sample(dayOrNight, size = 1)
 
-lights_levels <- c("off", "on")        # A
-music_levels  <- c("no", "yes")        # B
-time_levels   <- c("morning", "evening")  # C
 
-design_grid <- expand.grid(
-  subject = subjects,
-  lights  = lights_levels,
-  music   = music_levels,
-  time    = time_levels
+otherTreatments <- c('MusicAndLight', 'MusicAndDark', 'QuietAndLight', 'QuietAndDark')
+firstOrder1 <- sample(otherTreatments, size = 4)
+firstOrder2 <- sample(otherTreatments, size = 4)
+firstOrder3 <- sample(otherTreatments, size = 4)
+firstOrder4 <- sample(otherTreatments, size = 4)
+secondOrder1 <- sample(otherTreatments, size = 4)
+secondOrder2 <- sample(otherTreatments, size = 4)
+secondOrder3 <- sample(otherTreatments, size = 4)
+secondOrder4 <- sample(otherTreatments, size = 4)
+#print(firstOrder)
+#print(secondOrder)
+
+cat(c('Person1 will first test during the ', FirstTreatment1))
+cat(c('\nDuring the first group, the order will be', firstOrder1))
+cat(c('\nand the second group of tests, the order will be', secondOrder1))
+cat(c('\n\n'))
+cat(c('Person2 will first test during the ', FirstTreatment2))
+cat(c('\nDuring the first group, the order will be', firstOrder2))
+cat(c('\nand the second group of tests, the order will be', secondOrder2))
+cat(c('\n\n'))
+cat(c('Person3 will first test during the ', FirstTreatment3))
+cat(c('\nDuring the first group, the order will be', firstOrder3))
+cat(c('\nand the second group of tests, the order will be', secondOrder3))
+cat(c('\n\n'))
+cat(c('\nPerson4 will first test during the ', FirstTreatment4))
+cat(c('\nDuring the first group, the order will be', firstOrder4))
+cat(c('\nand the second group of tests, the order will be', secondOrder4))
+
+```
+
+```{r}
+Person1df <- data.frame(
+  times = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  dayIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  musicIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  lightsOnIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  )
 )
 
-set.seed(123)
+Person2df <- data.frame(
+  times = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  dayIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  musicIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  lightsOnIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  )
+)
 
-random_schedule <- design_grid %>%
-  group_by(subject) %>%
-  slice_sample(n = 8) %>%              # 8 treatment combinations per subject
-  mutate(order = row_number()) %>%
-  arrange(subject, order)
+Person3df <- data.frame(
+  times = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  dayIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  musicIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  lightsOnIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  )
+)
 
-random_schedule
+Person4df <- data.frame(
+  times = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  dayIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  musicIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ),
+  lightsOnIsOne = c(
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  )
+)
+
+Totaldf <- data.frame(Person1df, Person2df, Person3df, Person4df)
+
 ```
+
+
+
