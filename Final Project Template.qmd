@@ -36,10 +36,10 @@ knitr::opts_chunk$set(error =  FALSE)
 <div style="text-align: center">
 <span style="color: blue;"> **STUDENT NAME **</span> 
 </div>
-- STUDENT 1    (NetID 1)
-- STUDENT 2    (NetID 2)
-- STUDENT 3    (NetID 3)
-- STUDENT 4    (NetID 4)
+- Alex Dieter    (A070X06)
+- Ayden Kelleher    (7874209)
+- Darren Tran    (A1H9J10)
+- Peyton Lynch    (A09Y96)
 :::
 
 

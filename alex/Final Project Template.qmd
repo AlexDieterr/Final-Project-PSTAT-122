@@ -116,25 +116,34 @@ Setting up Randomization part
 ```{r}
 library(dplyr)
 
+set.seed(122)
+
 subjects <- 1:4
+lights_levels <- c("off", "on")
+music_levels  <- c("no", "yes")
 
-lights_levels <- c("off", "on")        # A
-music_levels  <- c("no", "yes")        # B
-time_levels   <- c("morning", "evening")  # C
-
-design_grid <- expand.grid(
-  subject = subjects,
-  lights  = lights_levels,
-  music   = music_levels,
-  time    = time_levels
+# full factorial 2x2
+treatments <- expand.grid(
+  lights = lights_levels,
+  music  = music_levels
 )
 
-set.seed(123)
+# function: randomize the 4 treatments for one subject
+assign_order <- function(subject_id) {
+  treatments %>%
+    mutate(
+      subject = subject_id,
+      order = sample(1:4)  # randomly permuted order for this subject
+    )
+}
 
-random_schedule <- design_grid %>%
-  group_by(subject) %>%
-  slice_sample(n = 8) %>%              # 8 treatment combinations per subject
-  mutate(order = row_number()) %>%
+# apply to all 4 subjects
+random_schedule <- bind_rows(
+  assign_order(1),
+  assign_order(2),
+  assign_order(3),
+  assign_order(4)
+) %>%
   arrange(subject, order)
 
 random_schedule
