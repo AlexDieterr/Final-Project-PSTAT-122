@@ -181,12 +181,13 @@ enter_times("Darren", "music", "dark",  "dom",  c(271, 293, 307, 260, 275))
 enter_times("Darren", "quiet", "light", "dom",  c(223, 215, 221, 229, 253))
 
 # Peyton's Data
-enter_times("Peyton", "music", "light", "weak", c(0, 0, 0, 0, 0))
-enter_times("Peyton", "music", "light", "dom",  c(0, 0, 0, 0, 0))
-enter_times("Peyton", "quiet", "dark",  "weak", c(0, 0, 0, 0, 0))
-enter_times("Peyton", "quiet", "light", "dom",  c(0, 0, 0, 0, 0))
-enter_times("Peyton", "music", "dark",  "dom",  c(0, 0, 0, 0, 0))
-enter_times("Peyton", "quiet", "dark",  "dom",  c(0, 0, 0, 0, 0))
-enter_times("Peyton", "music", "dark",  "weak", c(0, 0, 0, 0, 0))
-enter_times("Peyton", "quiet", "light", "weak", c(0, 0, 0, 0, 0))
+enter_times("Peyton", "music", "light", "weak", c(272, 265, 279, 236, 312))
+enter_times("Peyton", "music", "light", "dom",  c(287, 243, 265, 229, 259))
+enter_times("Peyton", "quiet", "dark",  "weak", c(222, 329, 233, 289, 278))
+enter_times("Peyton", "quiet", "light", "dom",  c(228, 249, 295, 264, 232))
+enter_times("Peyton", "music", "dark",  "dom",  c(252, 229, 243, 250, 239))
+enter_times("Peyton", "quiet", "dark",  "dom",  c(223, 226, 238, 218, 217))
+enter_times("Peyton", "music", "dark",  "weak", c(228, 243, 291, 220, 312))
+enter_times("Peyton", "quiet", "light", "weak", c(260, 261, 275, 249, 258))
+
 ```
