@@ -159,14 +159,14 @@ enter_times <- function(name, music, lights, hand, times) {
 }
 
 # Alex's Data
-enter_times("Alex", "music", "light", "weak", c(0, 0, 0, 0, 0))
-enter_times("Alex", "quiet", "dark",  "weak", c(0, 0, 0, 0, 0))
-enter_times("Alex", "quiet", "light", "dom",  c(0, 0, 0, 0, 0))
-enter_times("Alex", "music", "dark",  "weak", c(0, 0, 0, 0, 0))
-enter_times("Alex", "music", "light", "dom",  c(0, 0, 0, 0, 0))
-enter_times("Alex", "music", "dark",  "dom",  c(0, 0, 0, 0, 0))
-enter_times("Alex", "quiet", "light", "weak", c(0, 0, 0, 0, 0))
-enter_times("Alex", "quiet", "dark",  "dom",  c(0, 0, 0, 0, 0))
+enter_times("Alex", "music", "light", "weak", c(265, 217, 219, 261, 260))
+enter_times("Alex", "quiet", "dark",  "weak", c(250, 271, 259, 202, 216))
+enter_times("Alex", "quiet", "light", "dom",  c(207, 206, 203, 126, 189))
+enter_times("Alex", "music", "dark",  "weak", c(181, 236, 194, 215, 214))
+enter_times("Alex", "music", "light", "dom",  c(197, 189, 97, 200, 181))
+enter_times("Alex", "music", "dark",  "dom",  c(197, 147, 96, 194, 201))
+enter_times("Alex", "quiet", "light", "weak", c(214, 183, 241, 87, 221))
+enter_times("Alex", "quiet", "dark",  "dom",  c(212, 202, 203, 187, 159))
 
 # Ayden's Data
 enter_times("Ayden", "quiet", "dark",  "weak", c(0, 0, 0, 0, 0))
