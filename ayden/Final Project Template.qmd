@@ -19,10 +19,8 @@ format:
     number-sections: true
     geometry: margin=.5in
     indent: true
-
-
-
 ---
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(message =  FALSE)
 knitr::opts_chunk$set(warning =  FALSE)
@@ -30,83 +28,77 @@ knitr::opts_chunk$set(error =  FALSE)
 
 ```
 
-
-
-:::callout
-<div style="text-align: center">
-<span style="color: blue;"> **STUDENT NAME **</span> 
-</div>
-- Alex Dieter    (A070X06)
-- Ayden Kelleher    (7874209)
-- Darren Tran    (A1H9J10)
-- Peyton Lynch    (A09Y96)
+:::: callout
+::: {style="text-align: center"}
+[ **STUDENT NAME** ]{style="color: blue;"}
 :::
 
+-   Alex Dieter (A070X06)
+-   Ayden Kelleher (7874209)
+-   Darren Tran (A1H9J10)
+-   Peyton Lynch (A09Y96)
+::::
 
-::: {.callout-caution}
+::: callout-caution
 # Due Date
+
 **Due Date:** Monday, December 8, 2025, 11:59 PM
 :::
 
-
 # Introduction
--	Clear statement of the objective or research question.
--	Brief context or motivation.
 
-  Reaction time is very important for many activities; sports, video games, avoiding injuries, and much more. However, the factors that influence ones reaction times are not very well known. What we are looking to find are what influences someones reaction time. What we intend to discover are the things that influence someones reaction time with common factors, namely whether or not you are listening to music, whether or not the lights are on or off, and whether you are using your dominant or non dominant hand. We will figure out which of these factors truly influence reaction time, and if there is any interaction. 
+-   Clear statement of the objective or research question.
+-   Brief context or motivation.
+
+Reaction time is very important for many activities; sports, video games, avoiding injuries, and much more. However, the factors that influence ones reaction times are not very well known. What we are looking to find are what influences someones reaction time. What we intend to discover are the things that influence someones reaction time with common factors, namely whether or not you are listening to music, whether or not the lights are on or off, and whether you are using your dominant or non dominant hand. We will figure out which of these factors truly influence reaction time, and if there is any interaction.
 
 # Experimental Design
 
+Our experiment will be a $2^3$ factorial experiment with blocks on what impacts reaction times, and how those factors interact. Our 3 factors will be the whether or not lights are on or off, whether or not you are listening to music, and whether or not you are using your dominant or non dominant hand. The way we will apply these treatments is by running our tests while the lights are on/off, whether or not the person being tested is listening to music, and have the person use their dominant or non dominant hand.
 
-  Our experiment will be a $2^3$ factorial experiment with blocks on what impacts reaction times, and how those factors interact. Our 3 factors will be the whether or not lights are on or off, whether or not you are listening to music, and whether or not you are using your dominant or non dominant hand. The way we will apply these treatments is by running our tests while the lights are on/off, whether or not the person being tested is listening to music, and have the person use their dominant or non dominant hand.
+We are measuring reaction time, through the following website, \newline `https://humanbenchmark.com/tests/reactiontime`. The way this website works is the screen changes color and you press the mouse as fast as you can after the screen color changes, and it records the time it takes to click. This website naturally does 5 tests and then returns us the mean from those 5 tests. We will conduct the whole test once, recording each individual reaction test as an experimental unit, so we have a better idea of the variance of the data. After some quick preliminary testing while choosing which website to use, we found that it takes less than 30 seconds to run through 5 experimental units, which means our testing should be quick, in accordance to the project guidelines.
 
+All of our factors will be fixed, since each factor contains each of the possible factors in that category. There is not a population of factors we are drawing from. Lights can be on or off, you can be using your dominant or non-dominant hand, and the tests can be conducted while the person is and isn't listening to music.
 
-  We are measuring reaction time, through the following website, \newline `https://humanbenchmark.com/tests/reactiontime`. The way this website works is the screen changes color and you press the mouse as fast as you can after the screen color changes, and it records the time it takes to click. This website naturally does 5 tests and then returns us the mean from those 5 tests. We will conduct the whole test once, recording each individual reaction test as an experimental unit, so we have a better idea of the variance of the data. After some quick preliminary testing while choosing which website to use, we found that it takes less than 30 seconds to run through 5 experimental units, which means our testing should be quick, in accordance to the project guidelines. 
-  
-  All of our factors will be fixed, since each factor contains each of the possible factors in that category. There is not a population of factors we are drawing from. Lights can be on or off, you can be using your dominant or non-dominant hand, and the tests can be conducted while the person is and isn't listening to music. 
+First, we will randomly order each of the treatments using code snippet 1 (7.1). The way this code works is it takes a random sample without replacement, which effectively gives us a random ordering of the tests. We will do this for each person, who will each be a block.
 
+The way our experiment will use replication is very simple. The website we are using to track our reaction times administers 5 tests and then returns the mean. Our experimental unit will be the time it takes for one individual click. This means each test we get 5 replications per factor. We will do these replications back to back.
 
-  First, we will randomly order each of the treatments using code snippet 1 (7.1). The way this code works is it takes a random sample without replacement, which effectively gives us a random ordering of the tests. We will do this for each person, who will each be a block. 
+Our blocks will be different people. Our group consists of 4 people, so we will each be a block. Thus for each combination of treatments and blocks, we get 5 replicates.
 
-  The way our experiment will use replication is very simple. The website we are using to track our reaction times administers 5 tests and then returns the mean. Our experimental unit will be the time it takes for one individual click. This means each test we get 5 replications per factor. We will do these replications back to back. 
-  
-  Our blocks will be different people. Our group consists of 4 people, so we will each be a block. Thus for each combination of treatments and blocks, we get 5 replicates. 
-
-- Sample size: Provide number of observations per condition.
-Guideline: 5–10 per treatment for CRD, 3–5 blocks for RCBD, total feasible within 1 hour.
+-   Sample size: Provide number of observations per condition. Guideline: 5–10 per treatment for CRD, 3–5 blocks for RCBD, total feasible within 1 hour.
 
 (You are encouraged to explore more resources for determining the sample size )
 
-
-
 # Data Collection
-- **Procedure**: Describe how and when the experiment was conducted (e.g., location, date, steps taken).
-- **Challenges/Adjustments**: Mention any difficulties or changes made during data collection (e.g., technical issues, time adjustments).
-- **Data Presentation**: Display the collected data in tables or graphs, summarizing key measures like mean and standard deviation..
+
+-   **Procedure**: Describe how and when the experiment was conducted (e.g., location, date, steps taken).
+-   **Challenges/Adjustments**: Mention any difficulties or changes made during data collection (e.g., technical issues, time adjustments).
+-   **Data Presentation**: Display the collected data in tables or graphs, summarizing key measures like mean and standard deviation..
 
 # Analysis
 
-- **Exploratory Data**: Start with basic statistics (mean, SD) and visualizations (e.g., boxplots) to understand the data.
+-   **Exploratory Data**: Start with basic statistics (mean, SD) and visualizations (e.g., boxplots) to understand the data.
 
+-   **Hypothesis Testing**: Test your hypothesis with an appropriate statistical test (e.g., ANOVA).
 
-- **Hypothesis Testing**: Test your hypothesis with an appropriate statistical test (e.g., ANOVA).
+-   **Tables, Figures, & Code**: Include key results (ANOVA table, post-test) and relevant `R` code excerpts where needed.
 
-- **Tables, Figures, & Code**: Include key results (ANOVA table, post-test) and relevant `R` code excerpts where needed.
-
--	Use `R` to analyze the data.
+-   Use `R` to analyze the data.
 
 # Conclusions
--	Summarize key findings.
-- Comment on limitations and possible improvements.
 
+-   Summarize key findings.
+-   Comment on limitations and possible improvements.
 
 # References
- (If needed.)
+
+(If needed.)
 
 # Appendices
- 
- - `R` code.
- 
+
+-   `R` code.
+
 ## Snippet 1
 
 ```{r}
@@ -120,188 +112,82 @@ Person2 <- sample(comboOfFactors, size = 8)
 Person3 <- sample(comboOfFactors, size = 8)
 Person4 <- sample(comboOfFactors, size = 8)
 
-cat('Alex will test in the following order\n', Person1[c(1,2,3,4)], '\n', Person1[c(5,6,7,8)])
-cat('Ayden will test in the following order\n', Person2[c(1,2,3,4)], '\n', Person2[c(5,6,7,8)])
-cat('Darren will test in the following order\n', Person3[c(1,2,3,4)], '\n', Person3[c(5,6,7,8)])
-cat('Peyton will test in the following order\n', Person4[c(1,2,3,4)], '\n', Person4[c(5,6,7,8)])
+cat('Alex will test in the following order\n', Person1[c(1,2,3,4)], '\n', Person1[c(5,6,7,8)],'\n')
+cat('\nAyden will test in the following order\n', Person2[c(1,2,3,4)], '\n', Person2[c(5,6,7,8)],'\n')
+cat('\nDarren will test in the following order\n', Person3[c(1,2,3,4)], '\n', Person3[c(5,6,7,8)],'\n')
+cat('\nPeyton will test in the following order\n', Person4[c(1,2,3,4)], '\n', Person4[c(5,6,7,8)],'\n')
 
 ```
- 
-## Snippet 2
+
 ```{r}
-Person1df <- data.frame(
-  times = c( #record your time in milliseconds
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  domhandIsOne = c( #record dominant hand as 1 and nondominant hand as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  musicIsOne = c( #record listening to music as 1 and not listening as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  lightsOnIsOne = c( #record lights on as 1 and lights off as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  )
-)
+library(dplyr)
 
-Person2df <- data.frame(
-  times = c( #record your time in milliseconds
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  domhandIsOne = c( #record dominant hand as 1 and nondominant hand as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  musicIsOne = c( #record listening to music as 1 and not listening as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  lightsOnIsOne = c( #record lights on as 1 and lights off as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  )
-)
+subjects     <- c("Alex", "Ayden", "Darren", "Peyton")
+music_levels <- c("quiet", "music")
+lights_lvls  <- c("dark", "light")
+hand_levels  <- c("dom", "weak")
 
-Person3df <- data.frame(
-  times = c( #record your time in milliseconds
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  domhandIsOne = c( #record dominant hand as 1 and nondominant hand as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  musicIsOne = c( #record listening to music as 1 and not listening as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  lightsOnIsOne = c( #record lights on as 1 and lights off as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  )
-)
+# 3-factor 2x2x2 × 4 subjects × 5 reps
+df <- expand.grid(
+  subject = subjects,
+  music   = music_levels,
+  lights  = lights_lvls,
+  hand    = hand_levels,
+  rep     = 1:5          # 5 runs per combo
+) %>%
+  arrange(subject)
 
-Person4df <- data.frame(
-  times = c( #record your time in milliseconds
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  domhandIsOne = c( #record dominant hand as 1 and nondominant hand as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  musicIsOne = c( #record listening to music as 1 and not listening as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  ),
-  lightsOnIsOne = c( #record lights on as 1 and lights off as 0
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0
-  )
-)
-
-Totaldf <- data.frame(Person1df, Person2df, Person3df, Person4df)
-
+# column where you'll put the reaction times
+df$time_ms <- NA_real_
 ```
 
+```{r}
+#This is the function so we can enter in all of our data easily
+enter_times <- function(name, music, lights, hand, times) {
+  df$time_ms[df$subject==name &
+             df$music==music &
+             df$lights==lights &
+             df$hand==hand] <<- times
+}
+
+# Alex's Data
+enter_times("Alex", "music", "light", "weak", c(265, 217, 219, 261, 260))
+enter_times("Alex", "quiet", "dark",  "weak", c(250, 271, 259, 202, 216))
+enter_times("Alex", "quiet", "light", "dom",  c(207, 206, 203, 126, 189))
+enter_times("Alex", "music", "dark",  "weak", c(181, 236, 194, 215, 214))
+enter_times("Alex", "music", "light", "dom",  c(197, 189, 97, 200, 181))
+enter_times("Alex", "music", "dark",  "dom",  c(197, 147, 96, 194, 201))
+enter_times("Alex", "quiet", "light", "weak", c(214, 183, 241, 87, 221))
+enter_times("Alex", "quiet", "dark",  "dom",  c(212, 202, 203, 187, 159))
+
+# Ayden's Data
+enter_times("Ayden", "quiet", "dark",  "weak", c(223, 245, 235, 226, 236))
+enter_times("Ayden", "music", "dark",  "weak", c(226, 233, 229, 235, 233))
+enter_times("Ayden", "music", "light", "dom",  c(220, 231, 275, 226, 238))
+enter_times("Ayden", "quiet", "light", "weak", c(252, 219, 218, 243, 235))
+enter_times("Ayden", "music", "light", "weak", c(226, 255, 247, 228, 242))
+enter_times("Ayden", "quiet", "light", "dom",  c(226, 338, 227, 196, 245))
+enter_times("Ayden", "quiet", "dark",  "dom",  c(224, 232, 223, 230, 231))
+enter_times("Ayden", "music", "dark",  "dom",  c(220, 241, 238, 257, 234))
+
+# Darren's Data
+enter_times("Darren", "quiet", "dark",  "weak", c(269, 264, 272, 274, 253))
+enter_times("Darren", "music", "dark",  "weak", c(130, 290, 273, 289, 291))
+enter_times("Darren", "music", "light", "dom",  c(247, 230, 118, 260, 232))
+enter_times("Darren", "music", "light", "weak", c(228, 251, 270, 261, 275))
+enter_times("Darren", "quiet", "light", "weak", c(290, 268, 260, 245, 271))
+enter_times("Darren", "quiet", "dark",  "dom",  c(267, 265, 248, 231, 259))
+enter_times("Darren", "music", "dark",  "dom",  c(271, 293, 307, 260, 275))
+enter_times("Darren", "quiet", "light", "dom",  c(223, 215, 221, 229, 253))
+
+# Peyton's Data
+enter_times("Peyton", "music", "light", "weak", c(272, 265, 279, 236, 312))
+enter_times("Peyton", "music", "light", "dom",  c(287, 243, 265, 229, 259))
+enter_times("Peyton", "quiet", "dark",  "weak", c(222, 329, 233, 289, 278))
+enter_times("Peyton", "quiet", "light", "dom",  c(228, 249, 295, 264, 232))
+enter_times("Peyton", "music", "dark",  "dom",  c(252, 229, 243, 250, 239))
+enter_times("Peyton", "quiet", "dark",  "dom",  c(223, 226, 238, 218, 217))
+enter_times("Peyton", "music", "dark",  "weak", c(228, 243, 291, 220, 312))
+enter_times("Peyton", "quiet", "light", "weak", c(260, 261, 275, 249, 258))
+
+```
