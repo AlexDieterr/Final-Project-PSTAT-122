@@ -161,14 +161,14 @@ enter_times("Alex", "quiet", "light", "weak", c(214, 183, 241, 87, 221))
 enter_times("Alex", "quiet", "dark",  "dom",  c(212, 202, 203, 187, 159))
 
 # Ayden's Data
-enter_times("Ayden", "quiet", "dark",  "weak", c(0, 0, 0, 0, 0))
-enter_times("Ayden", "music", "dark",  "weak", c(0, 0, 0, 0, 0))
-enter_times("Ayden", "music", "light", "dom",  c(0, 0, 0, 0, 0))
-enter_times("Ayden", "quiet", "light", "weak", c(0, 0, 0, 0, 0))
-enter_times("Ayden", "music", "light", "weak", c(0, 0, 0, 0, 0))
-enter_times("Ayden", "quiet", "light", "dom",  c(0, 0, 0, 0, 0))
-enter_times("Ayden", "quiet", "dark",  "dom",  c(0, 0, 0, 0, 0))
-enter_times("Ayden", "music", "dark",  "dom",  c(0, 0, 0, 0, 0))
+enter_times("Ayden", "quiet", "dark",  "weak", c(223, 245, 235, 226, 236))
+enter_times("Ayden", "music", "dark",  "weak", c(226, 233, 229, 235, 233))
+enter_times("Ayden", "music", "light", "dom",  c(220, 231, 275, 226, 238))
+enter_times("Ayden", "quiet", "light", "weak", c(252, 219, 218, 243, 235))
+enter_times("Ayden", "music", "light", "weak", c(226, 255, 247, 228, 242))
+enter_times("Ayden", "quiet", "light", "dom",  c(226, 338, 227, 196, 245))
+enter_times("Ayden", "quiet", "dark",  "dom",  c(224, 232, 223, 230, 231))
+enter_times("Ayden", "music", "dark",  "dom",  c(220, 241, 238, 257, 234))
 
 # Darren's Data
 enter_times("Darren", "quiet", "dark",  "weak", c(269, 264, 272, 274, 253))
