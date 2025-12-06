@@ -71,7 +71,11 @@ Our blocks will be different people. Our group consists of 4 people, so we will 
 (You are encouraged to explore more resources for determining the sample size )
 
 # Data Collection
+We collected all of our data on the same day, with each of us doing the experiment in our own rooms. Everyone used their own laptop and mouse, but we made sure the room was quiet before starting. To get used to the Human Benchmark test, we each did five practice clicks in a normal setting with no factors applied.
 
+After the warm-up, we followed the randomized order from Snippet 1. For every combination of music on/off, lights on/off, and dominant/weak hand, we ran Human Benchmark five separate times. Each run gave us one reaction time in milliseconds, so we ended up with five observations for each treatment combination.
+
+We didn’t run into any errors or bad trials, so we didn’t have to repeat anything. Once we finished all of the runs, we entered the reaction times into R using the data-entry function in the Appendix. Each row of the dataset represents one run, along with the subject, the factor levels, and the replicate number. This gave us a full dataset with 160 observations that we used for the exploratory plots and ANOVA.
 -   **Procedure**: Describe how and when the experiment was conducted (e.g., location, date, steps taken).
 -   **Challenges/Adjustments**: Mention any difficulties or changes made during data collection (e.g., technical issues, time adjustments).
 -   **Data Presentation**: Display the collected data in tables or graphs, summarizing key measures like mean and standard deviation..
