@@ -47,7 +47,9 @@ knitr::opts_chunk$set(error =  FALSE)
 
 # Introduction
 
-Reaction time is very important for many activities; sports, video games, avoiding injuries, and much more. However, the factors that influence ones reaction times are not very well known. What we are looking to find are what influences someones reaction time. What we intend to discover are the things that influence someones reaction time with common factors, namely whether or not you are listening to music, whether or not the lights are on or off, and whether you are using your dominant or non dominant hand. We will figure out which of these factors truly influence reaction time, and if there is any interaction.
+Reaction times are important because they offer a clear window into how efficiently the brain and body process information and respond to changing conditions. In everyday life, quick reaction times contribute to safety, whether it’s braking to avoid an accident, adjusting your balance to prevent a fall, or responding to unexpected changes in your environment. In sports and high pressure tasks, faster reaction times can be the difference between success and failure, making them central to training and evaluation. Ultimately, reaction times matter because they reflect how well we perceive, decide, and act in real time.
+
+However, the factors that influence ones reaction times are not very well known. What we are looking to find are what influences someones reaction time. What we intend to discover are the things that influence someones reaction time with common factors, namely whether or not you are listening to music, whether or not the lights are on or off, and whether you are using your dominant or non dominant hand. We will figure out which of these factors truly influence reaction time, and if there is any interaction.
 
 # Experimental Design
 
