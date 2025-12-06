@@ -246,7 +246,7 @@ ggplot(df, aes(x = hand, y = time_ms, color = lights, group = lights)) +
 ```
 
 
-Exploratory Data
+## Exploratory Data
 
 To get a first look at our data, we made several boxplots for each factor and a set of interaction plots. The boxplot for hand (dominant vs. weak) showed the clearest difference. The weak hand had noticeably slower reaction times on average, and the spread was larger. This matched what we expected, since most people are less coordinated with their non-dominant hand.
 
@@ -255,3 +255,34 @@ For the music factor, the boxplots for “quiet” and “music” looked fairly
 We also made interaction plots to check whether the factors influenced each other. The hand × music plot showed two lines that were almost parallel, meaning music probably doesn’t change the effect of hand very much. The hand × lights plot looked similar, with only small differences between the light and dark conditions. All of the lines went up from dominant to weak hand, which lines up with the boxplots.
 
 Overall, the exploratory graphs suggested that the hand factor has the strongest effect, while music and lighting might have smaller or weaker effects. The interaction plots didn’t show any major crossings, so any interactions are likely to be small. These patterns helped us get a feel for the data before running the formal ANOVA.
+
+## Analysis
+
+Now that we have a basic idea of what our data looks like, we can run an ANOVA test to see which factors have a significant effect on the response variable. 
+
+```{r}
+anova_model <- aov(time_ms ~ hand*lights*music+subject, data=df)
+summary(anova_model)
+
+```
+
+Recall that the null hypothesis test for an ANOVA test is all the means equal each other, and the alternate hypothesis is that at least one mean is different. 
+After running our ANOVA test, we can see that with significance level $\alpha=.05$, we have which hand you use is significant with a p-value of 0.000369, the interaction between all three is significant with p-value of 0.029744, and the subjects have a significant effect with a p-value of 4.39e-13. 
+However, if we use a Bonferroni adjusted $\alpha$ value, we get $\alpha_{Bonferroni}= \alpha/7 = .05/7 = .0071$, which means that only the hand used and subject (our blocks) are significant. 
+```{r}
+
+library(DescTools)
+bonferroni_test <- PostHocTest(anova_model,method = c("bonferroni"),conf.level=.05)
+print(
+  rbind(bonferroni_test$hand,bonferroni_test$lights,
+        bonferroni_test$music, bonferroni_test$subject    
+        ))
+
+
+```
+What this means is that we have evidence that whether or not you use your dominant hand is significant, different people have significant differences, and that we have poor evidence that the 3 way interaction term is significant. 
+
+
+
+
+
