@@ -47,16 +47,13 @@ knitr::opts_chunk$set(error =  FALSE)
 
 # Introduction
 
--   Clear statement of the objective or research question.
--   Brief context or motivation.
-
 Reaction time is very important for many activities; sports, video games, avoiding injuries, and much more. However, the factors that influence ones reaction times are not very well known. What we are looking to find are what influences someones reaction time. What we intend to discover are the things that influence someones reaction time with common factors, namely whether or not you are listening to music, whether or not the lights are on or off, and whether you are using your dominant or non dominant hand. We will figure out which of these factors truly influence reaction time, and if there is any interaction.
 
 # Experimental Design
 
 Our experiment will be a $2^3$ factorial experiment with blocks on what impacts reaction times, and how those factors interact. Our 3 factors will be the whether or not lights are on or off, whether or not you are listening to music, and whether or not you are using your dominant or non dominant hand. The way we will apply these treatments is by running our tests while the lights are on/off, whether or not the person being tested is listening to music, and have the person use their dominant or non dominant hand.
 
-We are measuring reaction time, through the following website, \newline `https://humanbenchmark.com/tests/reactiontime`. The way this website works is the screen changes color and you press the mouse as fast as you can after the screen color changes, and it records the time it takes to click. This website naturally does 5 tests and then returns us the mean from those 5 tests. We will conduct the whole test once, recording each individual reaction test as an experimental unit, so we have a better idea of the variance of the data. After some quick preliminary testing while choosing which website to use, we found that it takes less than 30 seconds to run through 5 experimental units, which means our testing should be quick, in accordance to the project guidelines.
+We are measuring reaction time, through the following website, \newline `https://humanbenchmark.com/tests/reactiontime`. The way this website works is the screen changes color and you press the mouse as fast as you can after the screen color changes, and it records the time it takes to click. For each click you get one recorded time, so for each set of factors, we will do 5 tests and then record the mean.  We will conduct the whole test once, recording each individual reaction test as an experimental unit, so we have a better idea of the variance of the data. After some quick preliminary testing while choosing which website to use, we found that it takes less than 30 seconds to run through 5 experimental units, which means our testing should be quick, in accordance to the project guidelines.
 
 All of our factors will be fixed, since each factor contains each of the possible factors in that category. There is not a population of factors we are drawing from. Lights can be on or off, you can be using your dominant or non-dominant hand, and the tests can be conducted while the person is and isn't listening to music.
 
@@ -68,7 +65,6 @@ Our blocks will be different people. Our group consists of 4 people, so we will 
 
 -   Sample size: Provide number of observations per condition. Guideline: 5–10 per treatment for CRD, 3–5 blocks for RCBD, total feasible within 1 hour.
 
-(You are encouraged to explore more resources for determining the sample size )
 
 # Data Collection
 We collected all of our data on the same day, with each of us doing the experiment in our own rooms. Everyone used their own laptop and mouse, but we made sure the room was quiet before starting. To get used to the Human Benchmark test, we each did five practice clicks in a normal setting with no factors applied.
@@ -95,7 +91,7 @@ We didn’t run into any errors or bad trials, so we didn’t have to repeat any
 
 # References
 
-(If needed.)
+https://humanbenchmark.com/tests/reactiontime
 
 # Appendices
 
