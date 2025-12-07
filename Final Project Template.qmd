@@ -30,7 +30,7 @@ knitr::opts_chunk$set(error =  FALSE)
 
 :::: callout
 ::: {style="text-align: center"}
-[ **STUDENT NAME** ]{style="color: blue;"}
+[**STUDENT NAME**]{style="color: blue;"}
 :::
 
 -   Alex Dieter (A070X06)
@@ -55,7 +55,7 @@ However, the factors that influence ones reaction times are not very well known.
 
 Our experiment will be a $2^3$ factorial experiment with blocks on what impacts reaction times, and how those factors interact. Our 3 factors will be the whether or not lights are on or off, whether or not you are listening to music, and whether or not you are using your dominant or non dominant hand. The way we will apply these treatments is by running our tests while the lights are on/off, whether or not the person being tested is listening to music, and have the person use their dominant or non dominant hand.
 
-We are measuring reaction time, through the following website, \newline `https://humanbenchmark.com/tests/reactiontime`. The way this website works is the screen changes color and you press the mouse as fast as you can after the screen color changes, and it records the time it takes to click. For each click you get one recorded time, so for each set of factors, we will do 5 tests and then record the mean.  We will conduct the whole test once, recording each individual reaction test as an experimental unit, so we have a better idea of the variance of the data. After some quick preliminary testing while choosing which website to use, we found that it takes less than 30 seconds to run through 5 experimental units, which means our testing should be quick, in accordance to the project guidelines.
+We are measuring reaction time, through the following website, \newline `https://humanbenchmark.com/tests/reactiontime`. The way this website works is the screen changes color and you press the mouse as fast as you can after the screen color changes, and it records the time it takes to click. For each click you get one recorded time, so for each set of factors, we will do 5 tests and then record the mean. We will conduct the whole test once, recording each individual reaction test as an experimental unit, so we have a better idea of the variance of the data. After some quick preliminary testing while choosing which website to use, we found that it takes less than 30 seconds to run through 5 experimental units, which means our testing should be quick, in accordance to the project guidelines.
 
 All of our factors will be fixed, since each factor contains each of the possible factors in that category. There is not a population of factors we are drawing from. Lights can be on or off, you can be using your dominant or non-dominant hand, and the tests can be conducted while the person is and isn't listening to music.
 
@@ -67,18 +67,15 @@ Our blocks will be different people. Our group consists of 4 people, so we will 
 
 -   Sample size: Provide number of observations per condition. Guideline: 5–10 per treatment for CRD, 3–5 blocks for RCBD, total feasible within 1 hour.
 
-
 # Data Collection
+
 We collected all of our data on the same day, with each of us doing the experiment in our own rooms. Everyone used their own laptop and mouse, but we made sure the room was quiet before starting. To get used to the Human Benchmark test, we each did five practice clicks in a normal setting with no factors applied.
 
 After the warm-up, we followed the randomized order from Snippet 1. For every combination of music on/off, lights on/off, and dominant/weak hand, we ran Human Benchmark five separate times. Each run gave us one reaction time in milliseconds, so we ended up with five observations for each treatment combination.
 
 We didn’t run into any errors or bad trials, so we didn’t have to repeat anything. Once we finished all of the runs, we entered the reaction times into R using the data-entry function in the Appendix. Each row of the dataset represents one run, along with the subject, the factor levels, and the replicate number. This gave us a full dataset with 160 observations that we used for the exploratory plots and ANOVA.
 
-
-
 # Analysis
-
 
 -   **Hypothesis Testing**: Test your hypothesis with an appropriate statistical test (e.g., ANOVA).
 
@@ -193,8 +190,10 @@ enter_times("Peyton", "quiet", "light", "weak", c(260, 261, 275, 249, 258))
 ```
 
 After collecting all of the reaction time measurements and entering them into R, we summarized the data by computing the mean and standard deviation for each of the eight treatment combinations (Music × Lights × Hand). This gives a quick overview of how reaction times behaved across the different conditions. The table below shows the average reaction time (in milliseconds) and the variability across the five replicates for each treatment:
+
 ```{r}
 library(dplyr)
+library(knitr)
 
 summary_table <- df %>%
   dplyr::group_by(music, lights, hand) %>%
@@ -203,8 +202,13 @@ summary_table <- df %>%
     sd_time   = sd(time_ms)
   )
 
-summary_table
+kable(summary_table,
+      col.names = c("Music", "Lights", "Hand", "Mean Time (ms)", "Std Dev (ms)"),
+      digits = 4,                            
+      caption = "Summary of Reaction Times by Treatment Group",
+      align = 'c')
 ```
+
 Overall, reaction times varied quite a bit across conditions. In general, the weak hand tended to be slower than the dominant hand in most settings, which matches what we expected. Music and lighting also seemed to influence the results, but the direction of the effect wasn’t immediately clear from the raw means alone. We use these summaries mainly to get a sense of the patterns in the data before moving on to the formal ANOVA in the analysis section.
 
 ```{r}
@@ -245,7 +249,6 @@ ggplot(df, aes(x = hand, y = time_ms, color = lights, group = lights)) +
 
 ```
 
-
 ## Exploratory Data
 
 To get a first look at our data, we made several boxplots for each factor and a set of interaction plots. The boxplot for hand (dominant vs. weak) showed the clearest difference. The weak hand had noticeably slower reaction times on average, and the spread was larger. This matched what we expected, since most people are less coordinated with their non-dominant hand.
@@ -258,7 +261,7 @@ Overall, the exploratory graphs suggested that the hand factor has the strongest
 
 ## Analysis
 
-Now that we have a basic idea of what our data looks like, we can run an ANOVA test to see which factors have a significant effect on the response variable. 
+Now that we have a basic idea of what our data looks like, we can run an ANOVA test to see which factors have a significant effect on the response variable.
 
 ```{r}
 anova_model <- aov(time_ms ~ hand*lights*music+subject, data=df)
@@ -266,23 +269,33 @@ summary(anova_model)
 
 ```
 
-Recall that the null hypothesis test for an ANOVA test is all the means equal each other, and the alternate hypothesis is that at least one mean is different. 
-After running our ANOVA test, we can see that with significance level $\alpha=.05$, we have which hand you use is significant with a p-value of 0.000369, the interaction between all three is significant with p-value of 0.029744, and the subjects have a significant effect with a p-value of 4.39e-13. 
-However, if we use a Bonferroni adjusted $\alpha$ value, we get $\alpha_{Bonferroni}= \alpha/7 = .05/7 = .0071$, which means that only the hand used and subject (our blocks) are significant. 
 ```{r}
+library(ggpubr)
+library(knitr)
 
-library(DescTools)
-bonferroni_test <- PostHocTest(anova_model,method = c("bonferroni"),conf.level=.05)
-print(
-  rbind(bonferroni_test$hand,bonferroni_test$lights,
-        bonferroni_test$music, bonferroni_test$subject    
-        ))
-
-
+anova_resid <- residuals(anova_model)
+ggqqplot(anova_resid, title = "Q-Q Plot of Residuals", ylab = "Sample Quantiles")
 ```
-What this means is that we have evidence that whether or not you use your dominant hand is significant, different people have significant differences, and that we have poor evidence that the 3 way interaction term is significant. 
 
+It is important to check the assumption of normality for the ANOVA model we have. Generating the Q-Q plot of residuals allows use to see this visually. From the Q-Q plot it is seen that the points follow the line closely and remain the 95% confidence band. We have some outliers in our tails, which shows there are some times in our reaction times that are either significantly lower or higher. This is expected as human reaction time is concrete for all humans due to many factors. So we can conclude that our residuals are normally distributed and follow through with our ANOVA test.
 
+Recall that the null hypothesis test for an ANOVA test is all the means equal each other, and the alternate hypothesis is that at least one mean is different. After running our ANOVA test, we can see that with significance level $\alpha=.05$, we have which hand you use is significant with a p-value of 0.000369, the interaction between all three is significant with p-value of 0.029744, and the subjects have a significant effect with a p-value of 4.39e-13. However, if we use a Bonferroni adjusted $\alpha$ value, we get $\alpha_{Bonferroni}= \alpha/7 = .05/7 = .0071$, which means that only the hand used and subject (our blocks) are significant.
 
+```{r}
+library(knitr)
+library(DescTools)
 
+bonferroni_test <- PostHocTest(anova_model, method = c("bonferroni"), conf.level = .05)
 
+kable(
+  rbind(bonferroni_test$hand, 
+        bonferroni_test$lights,
+        bonferroni_test$music, 
+        bonferroni_test$subject),
+  digits = 4,                   
+  caption = "Bonferroni Post-Hoc Test Results",
+  align = 'c'
+)
+```
+
+What this means is that we have evidence that whether or not you use your dominant hand is significant, different people have significant differences, and that we have poor evidence that the 3 way interaction term is significant.
