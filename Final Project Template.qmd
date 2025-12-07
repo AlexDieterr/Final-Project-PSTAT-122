@@ -92,9 +92,7 @@ We didn’t run into any errors or bad trials, so we didn’t have to repeat any
 
 https://humanbenchmark.com/tests/reactiontime
 
-Kandethody M. Ramachandran, Chris P. Tsokos, Chapter 9 - Analysis of variance, Editor(s): Kandethody M. Ramachandran, Chris P. Tsokos, Mathematical Statistics with Applications in R (Third Edition), Academic Press, 2021, Pages 369-414, ISBN 9780128178157, https://doi.org/10.1016/B978-0-12-817815-7.00009-9.
-(https://www.sciencedirect.com/science/article/pii/B9780128178157000099)
-
+Kandethody M. Ramachandran, Chris P. Tsokos, Chapter 9 - Analysis of variance, Editor(s): Kandethody M. Ramachandran, Chris P. Tsokos, Mathematical Statistics with Applications in R (Third Edition), Academic Press, 2021, Pages 369-414, ISBN 9780128178157, https://doi.org/10.1016/B978-0-12-817815-7.00009-9. (https://www.sciencedirect.com/science/article/pii/B9780128178157000099)
 
 # Appendices
 
@@ -275,7 +273,7 @@ summary(anova_model)
 
 Recall the assumptions of the ANOVA test, that the trials are independent, that the residuals are normally distributed, and that the residuals have equal variance.
 
-Our experimental design should ensure that the trials were independent. To double check, we will plot the residuals in time order, to see if there is a strong correlation between residuals. A tendency to have runs of positive nad negative residuals indicates positive correlation. 
+Our experimental design should ensure that the trials were independent. To double check, we will plot the residuals in time order, to see if there is a strong correlation between residuals. A tendency to have runs of positive nad negative residuals indicates positive correlation.
 
 ```{r}
 df_ordered <- df %>%
@@ -294,7 +292,8 @@ ordered_model <- aov(time_ms ~ hand*lights*music+subject, data=df_ordered)
 plot(ordered_model$residuals)
 
 ```
-After plotting the ordered residuals, we can see that there does not appear to be strong correlation between subsequent residuals, thus we can confirm our trials are independent. 
+
+After plotting the ordered residuals, we can see that there does not appear to be strong correlation between subsequent residuals, thus we can confirm our trials are independent.
 
 ```{r}
 library(ggpubr)
@@ -304,7 +303,7 @@ anova_resid <- residuals(anova_model)
 ggqqplot(anova_resid, title = "Q-Q Plot of Residuals", ylab = "Sample Quantiles")
 ```
 
-To check the assumption of normality for the ANOVA model we have, we will use the Q-Q plot of the residuals, which allows us to see if the residuals are distributed normally visually. From the Q-Q plot it is seen that the points follow the line closely and remain the 95% confidence band. We have some outliers in our tails, with larger than expected residuals. However, the normality assumption is robust for the fixed effect anova test, which means moderate departures from normality are of little concern. Thus we can say our residuals are normally distributed or close enough to be of little concern. 
+To check the assumption of normality for the ANOVA model we have, we will use the Q-Q plot of the residuals, which allows us to see if the residuals are distributed normally visually. From the Q-Q plot it is seen that the points follow the line closely and remain the 95% confidence band. We have some outliers in our tails, with larger than expected residuals. However, the normality assumption is robust for the fixed effect anova test, which means moderate departures from normality are of little concern. Thus we can say our residuals are normally distributed or close enough to be of little concern.
 
 ```{r}
 plot(anova_model$residuals ~ hand, data=df)
@@ -314,6 +313,7 @@ plot(anova_model$residuals ~ subject, data=df)
 ```
 
 Our last assumption to check is equal variance, or homoscedasticity. To test it, we create a box plot of residuals for each factor Looking at the boxplot, we can see that the variances for each main effect are about equal. However, the variance does seem to depend on the blocks. To verify this, we will use the bartlett test
+
 ```{r}
 subject_variance <- bartlett.test(anova_model$residuals ~ subject, data=df)
 cat( 'The p-value that all subjects have the same variance is',
@@ -337,11 +337,10 @@ kable(
 )
 
 ```
-We can see that the p-value for the test between different subjects is 0.008, which is significant for $\alpha=.05$. Thus we can conclude that the variance is different for different subjects. However,  we have equal sample sizes for each block and we have similar sized variances, where the largest is less than double than the smallest. According to chapter 9.3.2 of Ramachandran and Tsokos, "If the sizes of all the samples are equal, ANOVA is mostly robust for violation of homogeneity of the variances. A rule of thumb used for robustness for this condition is that the ratio of sample variance of the largest sample variance $s^2$ to the smallest sample variance $s^2$ should be no more than 3:1". We can see that our sample variances are under this limit, so we can say our anova test will be robust against this unequal variance.
 
-Therefore, we can say that fulfills all the assumptions. 
+We can see that the p-value for the test between different subjects is 0.008, which is significant for $\alpha=.05$. Thus we can conclude that the variance is different for different subjects. However, we have equal sample sizes for each block and we have similar sized variances, where the largest is less than double than the smallest. According to chapter 9.3.2 of Ramachandran and Tsokos, "If the sizes of all the samples are equal, ANOVA is mostly robust for violation of homogeneity of the variances. A rule of thumb used for robustness for this condition is that the ratio of sample variance of the largest sample variance $s^2$ to the smallest sample variance $s^2$ should be no more than 3:1". We can see that our sample variances are under this limit, so we can say our anova test will be robust against this unequal variance.
 
-
+Therefore, we can say that fulfills all the assumptions.
 
 Recall that the null hypothesis test for an ANOVA test is all the means equal each other, and the alternate hypothesis is that at least one mean is different. After running our ANOVA test, we can see that with significance level $\alpha=.05$, we have which hand you use is significant with a p-value of 0.000369, the interaction between all three is significant with p-value of 0.029744, and the subjects have a significant effect with a p-value of 4.39e-13. However, if we use a Bonferroni adjusted $\alpha$ value, we get $\alpha_{Bonferroni}= \alpha/7 = .05/7 = .0071$, which means that only the hand used and subject (our blocks) are significant.
 
@@ -363,3 +362,9 @@ kable(
 ```
 
 What this means is that we have evidence that whether or not you use your dominant hand is significant, different people have significant differences, and that we have poor evidence that the 3 way interaction term is significant.
+
+## Technical Limitations and Improvements
+
+The nature of our experiment presents a couple of limitations and technical challenges. Within our blocking factor, everyone possessed different levels of hardware, specifically device differences. One person's laptop or mouse may have more or less input lag, which in turn influences reaction times. The use of a browser based test plays a role as well, as the technology introduces a level of delay that is not reflective of the subject's actual reaction time. Aside from instrumentation influences, the block effect also captures the effect of physiological differences. Not every human is built with the same reaction speed; this can be due to factors like age and overall health. Furthermore, outside factors like caffeine usage, stress, and level of rest can impact times significantly. Lastly, we utilized a straightforward approach to the music factor: quiet or with music. This binary "yes or no" approach does not account for the genre of music the subject may be listening to. The genre may impact times, as a subject could be listening to music with a significantly higher or lower tempo.
+
+For future iterations of this experiment, it would be helpful to standardize the equipment, third-party influences, and the environment in which we conduct the test. Having everyone on the same setup, using the same laptop and mouse, would control the instrumentation noise that can impact the data. Honing in on the third-party influences that impact physiological performance, such as standardizing the use of stimulants like caffeine and the level of sleep, would help control the variation these factors introduce. Aside from standardizing, introducing a specific factor for stimulants would be another path to take. While the Human Benchmark website brings some documentation issues, the alternative plan having someone else manually time the person engaged in the experiment would introduce the issue of additional human error, as a timekeeper could easily stop the timer too early or too late. Ultimately the experiment of human reaction time, will always come with some form of uncontrollable human error.
