@@ -17,7 +17,7 @@ format:
     toc: false
     toc-location: left
     number-sections: true
-    geometry: margin=.5in
+    geometry: margin=1in
     indent: true
 ---
 
@@ -63,9 +63,7 @@ First, we will randomly order each of the treatments using code snippet 1 (7.1).
 
 The way our experiment will use replication is very simple. The website we are using to track our reaction times administers 5 tests and then returns the mean. Our experimental unit will be the time it takes for one individual click. This means each test we get 5 replications per factor. We will do these replications back to back.
 
-Our blocks will be different people. Our group consists of 4 people, so we will each be a block. Thus for each combination of treatments and blocks, we get 5 replicates.
-
--   Sample size: Provide number of observations per condition. Guideline: 5–10 per treatment for CRD, 3–5 blocks for RCBD, total feasible within 1 hour.
+Our blocks will be different people. Our group consists of 4 people, so we will each be a block. Thus for each combination of treatments and blocks, we get 5 replicates. 
 
 # Data Collection
 
@@ -248,6 +246,8 @@ We also made interaction plots to check whether the factors influenced each othe
 
 Overall, the exploratory graphs suggested that the hand factor has the strongest effect, while music and lighting might have smaller or weaker effects. The interaction plots didn’t show any major crossings, so any interactions are likely to be small. These patterns helped us get a feel for the data before running the formal ANOVA.
 
+\pagebreak
+
 ## Analysis
 
 Now that we have a basic idea of what our data looks like, we can run an ANOVA test to see which factors have a significant effect on the response variable.
@@ -327,7 +327,7 @@ kable(
 
 We can see that the p-value for the test between different subjects is 0.008, which is significant for $\alpha=.05$. Thus we can conclude that the variance is different for different subjects. However, we have equal sample sizes for each block and we have similar sized variances, where the largest is less than double than the smallest. According to chapter 9.3.2 of Ramachandran and Tsokos, "If the sizes of all the samples are equal, ANOVA is mostly robust for violation of homogeneity of the variances. A rule of thumb used for robustness for this condition is that the ratio of sample variance of the largest sample variance $s^2$ to the smallest sample variance $s^2$ should be no more than 3:1". We can see that our sample variances are under this limit, so we can say our anova test will be robust against this unequal variance.
 
-Therefore, we can say that fulfills all the assumptions.
+Therefore, we can say our model sufficiently fulfills all the assumptions.
 
 Recall that the null hypothesis test for an ANOVA test is all the means equal each other, and the alternate hypothesis is that at least one mean is different. After running our ANOVA test, we can see that with significance level $\alpha=.05$, we have which hand you use is significant with a p-value of 0.000369, the interaction between all three is significant with p-value of 0.029744, and the subjects have a significant effect with a p-value of 4.39e-13. However, if we use a Bonferroni adjusted $\alpha$ value, we get $\alpha_{Bonferroni}= \alpha/7 = .05/7 = .0071$, which means that only the hand used and subject (our blocks) are significant.
 
